@@ -4,6 +4,7 @@ let computerScore = 0;
 let playerScore = 0;
 let roundCount = 0;
 let playerChoice = 0;
+let noOfRounds = window.prompt("Enter Number Of Rounds");
 
 const choice = [
     "rock",
@@ -21,11 +22,10 @@ const playerPlay = () => {
     return choice;
 }
 
-const playRound = (computerChoice, playerChoice) => {
+const playRound = (computerChoice = computerPlay().toLowerCase(), playerChoice = playerPlay().toLowerCase()) => {
 
-    computerChoice = computerPlay().toLowerCase();
-    playerChoice = playerPlay().toLowerCase();
-    console.log(computerChoice, playerChoice);
+   
+    console.log(`Computer Choice : ${computerChoice}, Player Choice : ${playerChoice}`);
 
     if (computerChoice === playerChoice) {
         console.log("It's a DRAW !");
@@ -37,7 +37,7 @@ const playRound = (computerChoice, playerChoice) => {
         computerScore++;
         roundCount++;
         console.log(`Round Num : ${roundCount}, Computer : ${computerScore}, Player : ${playerScore}`);
-        if(roundCount == 5){
+        if(roundCount == noOfRounds){
             // call function game over
             gameOver(playerScore,computerScore);
         }    
@@ -49,7 +49,7 @@ const playRound = (computerChoice, playerChoice) => {
         playerScore++;
         roundCount++;
         console.log(`Round Num : ${roundCount}, Computer : ${computerScore}, Player : ${playerScore}`);
-        if(roundCount == 5){
+        if(roundCount == noOfRounds){
             gameOver(playerScore,computerScore);
         }
     }
@@ -70,8 +70,9 @@ const gameOver = (playerScore, computerScore) => {
 }
 
 const playGame = (noOfRounds) => {
-    while (noOfRounds>0) {
-        playRound()
-        noOfRounds-- ;
+    while (roundCount < noOfRounds) {
+        playRound();        
     }
 }
+
+playGame(noOfRounds);
